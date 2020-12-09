@@ -1,5 +1,6 @@
 const axios = require("axios");
 const {getUserName} = require("./user");
+const {execSync} = require("child_process");
 const {existsSync, readFileSync, writeFileSync} = require("fs");
 
 function getInboxPath(name) {
@@ -60,10 +61,16 @@ const readMessages = (name) => {
   return messages;
 }
 
+const sendMessages = () => {
+  const cmd = `git add outbox/\\* && git commit -m "Sending ${Date.now()}" && git push origin master`;
+  execSync(cmd);
+}
+
 module.exports = {
   getMessagesURLForFriend,
   downloadMessagesForFriend,
   downloadAllMessages,
   readMessages,
-  createMessage
+  createMessage,
+  sendMessages
 }

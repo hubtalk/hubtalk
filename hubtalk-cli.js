@@ -1,4 +1,5 @@
 #!/usr/bin/env node
+const {sendMessages} = require("./src/messages");
 const {encryptForSelf} = require("./src/crypt");
 const {downloadPublicKey} = require("./src/crypt");
 const {downloadAllMessages} = require("./src/messages");
@@ -92,6 +93,8 @@ async function handleReceive() {
 }
 
 function handleSend() {
-
+  console.log('Sending all messages...');
+  sendMessages();
+  console.log('Done!');
 }
 
