@@ -1,6 +1,6 @@
 # Hubtalk
 
-A prototype chat client for our survialence future. All conversation is visible to everybody, but only a few can decrypt.
+A prototype chat client for our surveillance future. All conversation is visible to everybody, but only a few can decrypt.
 
 ## Install
 
