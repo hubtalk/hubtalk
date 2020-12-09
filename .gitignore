@@ -1,4 +1,6 @@
 .idea
 friends/
+secret/
+inbox/
 friends.json
 node_modules

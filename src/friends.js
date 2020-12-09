@@ -1,13 +1,13 @@
 const fs = require("fs");
 
-const addFriend = (name) => {
+const addFriend = (name, key) => {
   const friends = getFriends();
 
-  if (friends.includes(name)) {
+  if (friends.find(friend => friend.name === name)) {
     return;
   }
 
-  fs.writeFileSync(getFriendsFilePath(), JSON.stringify([...friends, name]));
+  fs.writeFileSync(getFriendsFilePath(), JSON.stringify([...friends, {name, key}]));
 }
 
 const getFriends = () => {
