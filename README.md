@@ -1,6 +1,6 @@
 # Hubtalk
 
-Command line chat script.
+A prototype chat client for our survialence future. All conversation is visible to everybody, but only a few can decrypt.
 
 ## Install
 
