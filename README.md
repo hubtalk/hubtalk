@@ -18,10 +18,9 @@ Command line chat script.
 
 ## Usage
 
-Commands:
-  hubtalk-cli.js af <name>             Add a friend. (Github username)
-  hubtalk-cli.js lf                    List friends.
-  hubtalk-cli.js msg <name> <message>  Write message to a friend. (Will not send it!)
-  hubtalk-cli.js show <name>           Show conversation with a friend.
-  hubtalk-cli.js receive               Fetch all messages from friends.
-  hubtalk-cli.js send                  Send all messages.
+ - hubtalk-cli.js af <name>             Add a friend. (Github username)
+ - hubtalk-cli.js lf                    List friends.
+ - hubtalk-cli.js msg <name> <message>  Write message to a friend. (Will not send it!)
+ - hubtalk-cli.js show <name>           Show conversation with a friend.
+ - hubtalk-cli.js receive               Fetch all messages from friends.
+ - hubtalk-cli.js send                  Send all messages.
