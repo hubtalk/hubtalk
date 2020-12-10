@@ -5,7 +5,7 @@ const {downloadPublicKey} = require("./src/crypt");
 const {downloadAllMessages} = require("./src/messages");
 const {decrypt} = require("./src/crypt");
 const {readMessages} = require("./src/messages");
-const {encrypt} = require("./src/crypt");
+const {encrypt, generateKeys} = require("./src/crypt");
 const {createMessage} = require("./src/messages");
 const {getFriends} = require("./src/friends");
 const {addFriend} = require("./src/friends");
@@ -39,6 +39,11 @@ const argv = require('yargs/yargs')(process.argv.slice(2))
     command: 'send',
     desc: 'Send all messages.',
     handler: (argv) => handleSend()
+  })
+  .command({
+    command: 'setup',
+    desc: 'Initial setup',
+    handler: (argv) => handleSetup()
   })
   .demandCommand()
   .help()
@@ -98,3 +103,9 @@ function handleSend() {
   console.log('Done!');
 }
 
+function handleSetup() {
+  console.log('Setup')
+  console.log('- Generating your RSA key pair...');
+  generateKeys();
+  console.log('Done. You can start sending messages.');
+}
