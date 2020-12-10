@@ -1,7 +1,10 @@
 const axios = require("axios");
-const {getFriends} = require("./friends");
-const {readFileSync} = require("fs");
 const {publicEncrypt, privateDecrypt} = require("crypto");
+const {readFileSync, existsSync} = require("fs");
+const {execSync} = require("child_process");
+
+const {getFriends} = require("./friends");
+const {RSA_KEY_NAME, RSA_PUBLIC_KEY_PATH, RSA_PRIVATE_KEY_PATH} = require('./config')
 
 const encrypt = (message, name) => {
   const buffer = Buffer.from(message, 'utf8');
@@ -50,6 +53,22 @@ const downloadPublicKey = async (name) => {
     });
 }
 
+const generateKeys = () => {
+  if (existsSync(RSA_PUBLIC_KEY_PATH) || existsSync(RSA_PRIVATE_KEY_PATH)) {
+    console.error('ERROR: The key pair already exists.')
+    return
+  }
+
+  const privateCmd = `ssh-keygen -t rsa -b 4096 -P "" -m pem -f ${RSA_PRIVATE_KEY_PATH}`;
+  execSync(privateCmd);
+
+  const pubCmd = `ssh-keygen -f ${RSA_PRIVATE_KEY_PATH} -e -m pem > ${RSA_PUBLIC_KEY_PATH}`
+  execSync(pubCmd);
+
+  const publishCmd = `git add ${RSA_KEY_NAME}.pub && git commit -m "Publishing public key" && git push origin master`;
+  execSync(publishCmd);
+}
+
 const getKeyUrl = (name) => {
   return `https://raw.githubusercontent.com/${name}/hubtalk/master/hubtalk_rsa.pub`;
 }
@@ -58,5 +77,6 @@ module.exports = {
   encrypt,
   encryptForSelf,
   decrypt,
-  downloadPublicKey
+  downloadPublicKey,
+  generateKeys
 }
