@@ -1,26 +1,36 @@
-const {screen, box, Textarea, Form, Button} = require("blessed")
-const {grid} = require("blessed-contrib");
+const { screen, box, Textarea, Form, Button } = require("blessed");
+const { grid } = require("blessed-contrib");
 
 const boxStyle = {
   border: {
-    fg: 'green'
-  }
+    fg: "green",
+  },
 };
 
 const createLayout = () => {
   const myScreen = screen();
 
-  const myGrid = new grid({rows: 12, cols: 12, screen: myScreen});
+  // eslint-disable-next-line new-cap
+  const myGrid = new grid({ rows: 12, cols: 12, screen: myScreen });
 
-  const chatBox = myGrid.set(0, 0, 10, 10, box, {label: 'Messages', style: boxStyle});
-  const friendsBox = myGrid.set(0, 10, 10, 2, box, {label: 'Contacts', style: boxStyle});
-  const messageForm = myGrid.set(10, 0, 2, 12, Form, {label: 'Compose', style: boxStyle});
+  const chatBox = myGrid.set(0, 0, 10, 10, box, {
+    label: "Messages",
+    style: boxStyle,
+  });
+  const friendsBox = myGrid.set(0, 10, 10, 2, box, {
+    label: "Contacts",
+    style: boxStyle,
+  });
+  const messageForm = myGrid.set(10, 0, 2, 12, Form, {
+    label: "Compose",
+    style: boxStyle,
+  });
 
   const messageTextarea = Textarea({
     keys: true,
     parent: messageForm,
     mouse: true,
-    inputOnFocus: true
+    inputOnFocus: true,
   });
 
   const messageSubmit = Button({
@@ -34,24 +44,24 @@ const createLayout = () => {
     },
     right: 1,
     bottom: 0,
-    content: 'Submit',
+    content: "Submit",
     border: {
-      type: 'line'
+      type: "line",
     },
     style: {
       border: {
-        fg: 'green',
+        fg: "green",
       },
       focus: {
-        bg: 'green'
+        bg: "green",
       },
       hover: {
-        bg: 'green'
-      }
-    }
+        bg: "green",
+      },
+    },
   });
 
-  myScreen.render()
+  myScreen.render();
 
   return {
     screen: myScreen,
@@ -59,10 +69,10 @@ const createLayout = () => {
     friendsBox,
     messageForm,
     messageSubmit,
-    messageTextarea
-  }
-}
+    messageTextarea,
+  };
+};
 
 module.exports = {
-  createLayout
+  createLayout,
 };

@@ -1,4 +1,4 @@
-const {execSync} = require("child_process");
+const { execSync } = require("child_process");
 
 const getUserName = () => {
   const cmd = `git remote -v`;
@@ -8,10 +8,10 @@ const getUserName = () => {
   try {
     return cmdOut.match(/:(.*)\//)[1];
   } catch (e) {
-    throw new Error('Could not get username :(');
+    throw new Error("Could not get username :(");
   }
-}
+};
 
 module.exports = {
-  getUserName
-}
+  getUserName,
+};

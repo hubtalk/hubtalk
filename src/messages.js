@@ -1,16 +1,21 @@
 const axios = require("axios");
-const {getUserName} = require("./user");
-const {execSync} = require("child_process");
-const {existsSync, readFileSync, writeFileSync} = require("fs");
+const { execSync } = require("child_process");
+const { existsSync, readFileSync, writeFileSync } = require("fs");
+const { getUserName } = require("./user");
 
-function getInboxPath(name) {
-  return `${process.cwd()}/inbox/${name}.json`;
-}
+const getInboxPath = (name) => `${process.cwd()}/inbox/${name}.json`;
+
+const getOutboxPath = (recipient) =>
+  `${process.cwd()}/outbox/${recipient}.json`;
+
+const getMessagesURLForFriend = (name) =>
+  `https://raw.githubusercontent.com/${name}/hubtalk/master/outbox/${getUserName()}.json`;
 
 const downloadMessagesForFriend = async (name) => {
   try {
-    return await axios.get(getMessagesURLForFriend(name), {responseType: "json"})
-      .then(response => {
+    return await axios
+      .get(getMessagesURLForFriend(name), { responseType: "json" })
+      .then((response) => {
         writeFileSync(
           getInboxPath(name),
           JSON.stringify(response.data, null, 2)
@@ -21,32 +26,18 @@ const downloadMessagesForFriend = async (name) => {
   } catch (e) {
     return [];
   }
-}
+};
 
-const downloadAllMessages = async (friends) => {
-  return Promise.all(friends.map((friend) => downloadMessagesForFriend(friend.name))).then((data) => data);
-}
-
-const getMessagesURLForFriend = (name) => {
-  return `https://raw.githubusercontent.com/${name}/hubtalk/master/outbox/${getUserName()}.json`;
-}
-
-const getOutboxPath = (recipient) => {
-  return `${process.cwd()}/outbox/${recipient}.json`;
-}
-
-const createMessage = (name, message, shadow) => {
-  const messages = readMessages(name).outbox;
-  const filename = getOutboxPath(name);
-
-  writeFileSync(filename, JSON.stringify([...messages, {time: Date.now(), message, shadow}]));
-}
+const downloadAllMessages = async (friends) =>
+  Promise.all(
+    friends.map((friend) => downloadMessagesForFriend(friend.name))
+  ).then((data) => data);
 
 const readMessages = (name) => {
   const messages = {
     inbox: [],
-    outbox: []
-  }
+    outbox: [],
+  };
 
   if (existsSync(getOutboxPath(name))) {
     const outboxMessages = readFileSync(getOutboxPath(name)).toString();
@@ -59,12 +50,22 @@ const readMessages = (name) => {
   }
 
   return messages;
-}
+};
+
+const createMessage = (name, message, shadow) => {
+  const messages = readMessages(name).outbox;
+  const filename = getOutboxPath(name);
+
+  writeFileSync(
+    filename,
+    JSON.stringify([...messages, { time: Date.now(), message, shadow }])
+  );
+};
 
 const sendMessages = () => {
   const cmd = `git add outbox/\\* && git commit -m "Sending ${Date.now()}" && git push origin master`;
   execSync(cmd);
-}
+};
 
 module.exports = {
   getMessagesURLForFriend,
@@ -72,5 +73,5 @@ module.exports = {
   downloadAllMessages,
   readMessages,
   createMessage,
-  sendMessages
-}
+  sendMessages,
+};

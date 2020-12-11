@@ -1,22 +1,27 @@
-const {createLayout} = require("./src/layout");
+const { createLayout } = require("./src/layout");
 
 function main() {
-  const {screen, messageForm, messageTextarea, messageSubmit} = createLayout();
+  const {
+    screen,
+    messageForm,
+    messageTextarea,
+    messageSubmit,
+  } = createLayout();
 
-  screen.key(['escape', 'q', 'C-c'], (ch, key) => process.exit(0));
+  screen.key(["escape", "q", "C-c"], () => process.exit(0));
 
-  messageTextarea.key(['tab'], (ch, key) => {
+  messageTextarea.key(["tab"], () => {
     messageForm.focusNext();
   });
 
-  screen.key(['tab'], (ch, key) => {
+  screen.keyPress(["tab"], () => {
     messageForm.focusNext();
     return false;
   });
 
-  messageSubmit.on('submit', () => {
+  messageSubmit.on("submit", () => {
     messageTextarea.clear();
-  })
+  });
 }
 
 main();
