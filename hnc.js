@@ -9,14 +9,13 @@ function main() {
   } = createLayout();
 
   screen.key(["escape", "q", "C-c"], () => process.exit(0));
+  screen.key(["tab"], () => {
+    messageForm.focusNext();
+    return false;
+  });
 
   messageTextarea.key(["tab"], () => {
     messageForm.focusNext();
-  });
-
-  screen.keyPress(["tab"], () => {
-    messageForm.focusNext();
-    return false;
   });
 
   messageSubmit.on("submit", () => {
