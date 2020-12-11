@@ -19,6 +19,8 @@
   "homepage": "https://github.com/hubtalk/hubtalk#readme",
   "dependencies": {
     "axios": "^0.21.0",
+    "blessed": "^0.1.81",
+    "blessed-contrib": "^4.8.20",
     "yargs": "^16.2.0"
   }
 }
