@@ -1,14 +1,18 @@
-const { screen, box, Textarea, Form, Button } = require("blessed");
+const { screen, box, Textarea, Form, Button, List } = require("blessed");
 const { grid } = require("blessed-contrib");
+
+const terminalGreen = "#00ff66";
 
 const boxStyle = {
   border: {
-    fg: "green",
+    fg: terminalGreen,
   },
 };
 
 const createLayout = () => {
-  const myScreen = screen();
+  const myScreen = screen({
+    smartCSR: true,
+  });
 
   // eslint-disable-next-line new-cap
   const myGrid = new grid({ rows: 12, cols: 12, screen: myScreen });
@@ -16,7 +20,19 @@ const createLayout = () => {
   const chatBox = myGrid.set(0, 0, 10, 10, box, {
     label: "Messages",
     style: boxStyle,
+    mouse: true,
+    tags: true,
+    scrollable: true,
+    alwaysScroll: true,
+    keys: true,
+    vi: true,
+    scrollbar: {
+      style: {
+        bg: "yellow",
+      },
+    },
   });
+
   const friendsBox = myGrid.set(0, 10, 10, 2, box, {
     label: "Contacts",
     style: boxStyle,
@@ -50,18 +66,28 @@ const createLayout = () => {
     },
     style: {
       border: {
-        fg: "green",
+        fg: terminalGreen,
       },
       focus: {
-        bg: "green",
+        bg: terminalGreen,
       },
       hover: {
-        bg: "green",
+        bg: terminalGreen,
       },
     },
   });
 
-  myScreen.render();
+  const friendsList = List({
+    parent: friendsBox,
+    mouse: true,
+    keys: true,
+    inputOnFocus: true,
+    style: {
+      selected: {
+        bg: terminalGreen,
+      },
+    },
+  });
 
   return {
     screen: myScreen,
@@ -70,9 +96,11 @@ const createLayout = () => {
     messageForm,
     messageSubmit,
     messageTextarea,
+    friendsList,
   };
 };
 
 module.exports = {
   createLayout,
+  terminalGreen,
 };
