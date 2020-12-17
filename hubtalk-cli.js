@@ -115,6 +115,10 @@ function handleSend() {
   console.log("Done!");
 }
 
+function getBoxGitCommand() {
+  return `git -C ./${PATH_DATA}`;
+}
+
 function handleSetup(name) {
   console.log("Setup");
   console.log("- Cloning data repository...");
@@ -122,5 +126,11 @@ function handleSetup(name) {
   execSync(cloneCmd);
   console.log("- Generating your RSA key pair...");
   generateKeys();
+  const gitAddCmd = `${getBoxGitCommand()} add --all`;
+  execSync(gitAddCmd);
+  const gitCommitCmd = `${getBoxGitCommand()} commit -a -m "Publishing key"`;
+  execSync(gitCommitCmd);
+  const gitPushCmd = `${getBoxGitCommand()} push origin master`;
+  execSync(gitPushCmd);
   console.log("Done. You can start sending messages.");
 }
