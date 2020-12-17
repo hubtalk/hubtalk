@@ -7,7 +7,7 @@ A prototype chat client for our surveillance future. All conversation is visible
 1. Fork this repository with your github user.
 2. Clone the forked repository.
 3. Run `npm i -g`
-4. Run `npm run setup`
+4. Run `hubtalk setup <github-username>`
 
 ## Usage
 

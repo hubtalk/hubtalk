@@ -7,8 +7,7 @@
     "hubtalk": "./hubtalk-cli.js"
   },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "setup": "node hubtalk-cli.js setup"
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
     "type": "git",
