@@ -5,7 +5,7 @@ const { PATH_DATA } = require("./constants");
 const { getUserName } = require("./user");
 
 const getInboxPath = (name) =>
-  `${process.cwd()}/${PATH_DATA}/inbox/${name}.json`;
+  `${process.cwd()}/${PATH_DATA}/messages/inbox/${name}.json`;
 
 const getOutboxPath = (recipient) =>
   `${process.cwd()}/${PATH_DATA}/messages/outbox/${recipient}.json`;
@@ -26,6 +26,8 @@ const downloadMessagesForFriend = async (name) => {
         return response.data;
       });
   } catch (e) {
+    console.log("e", e);
+
     return [];
   }
 };

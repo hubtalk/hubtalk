@@ -1,7 +1,8 @@
 const { execSync } = require("child_process");
+const { PATH_DATA } = require("./constants");
 
 const getUserName = () => {
-  const cmd = `git remote -v`;
+  const cmd = `git -C ./${PATH_DATA} remote -v`;
 
   const cmdOut = execSync(cmd).toString();
 
