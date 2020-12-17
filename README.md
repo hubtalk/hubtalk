@@ -4,10 +4,9 @@ A prototype chat client for our surveillance future. All conversation is visible
 
 ## Install
 
-1. Fork this repository with your github user.
-2. Clone the forked repository.
-3. Run `npm i -g`
-4. Run `hubtalk setup <github-username>`
+1. Clone the forked repository.
+2. Run `npm i -g`
+3. Run `hubtalk setup <github-username>`
 
 ## Usage
 
