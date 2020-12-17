@@ -65,7 +65,7 @@ const createMessage = (name, message, shadow) => {
 };
 
 const sendMessages = () => {
-  const cmd = `git -C ./${PATH_DATA} add outbox/\\* && git -C ./${PATH_DATA} commit -m "Sending ${Date.now()}" && git -C ./${PATH_DATA} push origin master`;
+  const cmd = `git -C ./${PATH_DATA} add --all && git -C ./${PATH_DATA} commit -m "Sending ${Date.now()}" && git -C ./${PATH_DATA} push origin master`;
   execSync(cmd);
 };
 
