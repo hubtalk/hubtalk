@@ -8,7 +8,7 @@ const getInboxPath = (name) =>
   `${process.cwd()}/${PATH_DATA}/inbox/${name}.json`;
 
 const getOutboxPath = (recipient) =>
-  `${process.cwd()}/${PATH_DATA}/outbox/${recipient}.json`;
+  `${process.cwd()}/${PATH_DATA}/messages/outbox/${recipient}.json`;
 
 const getMessagesURLForFriend = (name) =>
   `https://raw.githubusercontent.com/${name}/hubtalk-box/master/messages/outbox/${getUserName()}.json`;
@@ -65,7 +65,7 @@ const createMessage = (name, message, shadow) => {
 };
 
 const sendMessages = () => {
-  const cmd = `git add outbox/\\* && git commit -m "Sending ${Date.now()}" && git push origin master`;
+  const cmd = `git -C ./${PATH_DATA} add outbox/\\* && git -C ./${PATH_DATA} commit -m "Sending ${Date.now()}" && git -C ./${PATH_DATA} push origin master`;
   execSync(cmd);
 };
 

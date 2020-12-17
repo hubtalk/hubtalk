@@ -20,7 +20,8 @@ const getPublicKey = (name) => {
   return friends.find((friend) => friend.name === name).key;
 };
 
-const getOwnPublicKeyPath = () => `${process.cwd()}/hubtalk_rsa.pub`;
+const getOwnPublicKeyPath = () =>
+  `${process.cwd()}/${PATH_DATA}/hubtalk_rsa.pub`;
 
 const getOwnPublicKey = () =>
   readFileSync(getOwnPublicKeyPath(), "utf8").toString();
