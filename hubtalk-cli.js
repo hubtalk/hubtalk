@@ -1,5 +1,6 @@
 /* eslint-disable no-use-before-define */
 const { execSync } = require("child_process");
+const yargs = require("yargs/yargs");
 const { PATH_DATA } = require("./src/constants");
 const { sendMessages } = require("./src/messages");
 const { encryptForSelf } = require("./src/crypt");
@@ -12,7 +13,8 @@ const { createMessage } = require("./src/messages");
 const { getFriends } = require("./src/friends");
 const { addFriend } = require("./src/friends");
 
-require("yargs/yargs")(process.argv.slice(2))
+// eslint-disable-next-line no-unused-expressions
+yargs(process.argv.slice(2))
   .command({
     command: "af <name>",
     desc: "Add a friend. (Github username)",
@@ -49,7 +51,7 @@ require("yargs/yargs")(process.argv.slice(2))
     handler: (argv) => handleSetup(argv.name),
   })
   .demandCommand()
-  .help();
+  .help().argv;
 
 async function handleAddFriend(name) {
   console.log(`Adding friend: ${name}`);

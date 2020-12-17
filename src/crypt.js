@@ -58,9 +58,6 @@ const generateKeys = () => {
 
   const pubCmd = `ssh-keygen -f ${RSA_PRIVATE_KEY_PATH} -e -m pem > ${RSA_PUBLIC_KEY_PATH}`;
   execSync(pubCmd);
-
-  const publishCmd = `git add ${RSA_KEY_NAME}.pub && git commit -m "Publishing public key" && git push origin master`;
-  execSync(publishCmd);
 };
 
 module.exports = {
