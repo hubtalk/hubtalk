@@ -16,9 +16,10 @@ Run `hubtalk setup <github-username>`
 
 ## Usage
 
-    hubtalk af <name>             Add a friend. (Github username)
-    hubtalk lf                    List friends.
+    hubtalk add <name>            Add a friend. (Github username)
+    hubtalk friends               List friends.
     hubtalk msg <name> <message>  Write message to a friend. (Will not send it!)
     hubtalk show <name>           Show conversation with a friend.
     hubtalk receive               Fetch all messages from friends.
     hubtalk send                  Send all messages.
+    hubtalk update                Update hubtalk (self-update)
