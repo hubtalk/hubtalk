@@ -51,6 +51,11 @@ yargs(process.argv.slice(2))
     desc: "Initial setup",
     handler: (argv) => handleSetup(argv.name),
   })
+  .command({
+    command: "update",
+    desc: "Self-update",
+    handler: (argv) => handleUpdate(),
+  })
   .demandCommand()
   .help().argv;
 
@@ -113,6 +118,15 @@ async function handleReceive() {
 function handleSend() {
   console.log("Sending all messages...");
   sendMessages();
+  console.log("Done!");
+}
+
+function handleUpdate() {
+  console.log("Updating hubtalk...");
+  const updateCmd = `git pull`;
+  execSync(updateCmd);
+  const installCmd = `npm i -g`;
+  execSync(installCmd);
   console.log("Done!");
 }
 
