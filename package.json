@@ -3,6 +3,9 @@
   "version": "0.1.0",
   "description": "For sending messages.",
   "main": "index.js",
+  "bin": {
+    "hubtalk": "./hubtalk-cli.js"
+  },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "setup": "node hubtalk-cli.js setup"

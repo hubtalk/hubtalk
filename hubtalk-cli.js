@@ -1,3 +1,4 @@
+#!/usr/bin/env node
 /* eslint-disable no-use-before-define */
 const { execSync } = require("child_process");
 const yargs = require("yargs/yargs");
