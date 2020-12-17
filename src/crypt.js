@@ -26,7 +26,7 @@ const getOwnPublicKey = () =>
   readFileSync(getOwnPublicKeyPath(), "utf8").toString();
 
 const getKeyUrl = (name) =>
-  `https://raw.githubusercontent.com/${name}/hubtalk/master/hubtalk_rsa.pub`;
+  `https://raw.githubusercontent.com/${name}/hubtalk-box/master/hubtalk_rsa.pub`;
 
 const encrypt = (message, name) => {
   const buffer = Buffer.from(message, "utf8");

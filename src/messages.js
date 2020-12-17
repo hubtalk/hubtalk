@@ -8,10 +8,10 @@ const getInboxPath = (name) =>
   `${process.cwd()}/${PATH_DATA}/inbox/${name}.json`;
 
 const getOutboxPath = (recipient) =>
-  `${process.cwd()}/box/outbox/${recipient}.json`;
+  `${process.cwd()}/${PATH_DATA}/outbox/${recipient}.json`;
 
 const getMessagesURLForFriend = (name) =>
-  `https://raw.githubusercontent.com/${name}/hubtalk/master/outbox/${getUserName()}.json`;
+  `https://raw.githubusercontent.com/${name}/hubtalk-box/master/messages/outbox/${getUserName()}.json`;
 
 const downloadMessagesForFriend = async (name) => {
   try {
