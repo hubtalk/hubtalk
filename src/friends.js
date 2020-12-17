@@ -1,6 +1,7 @@
 const fs = require("fs");
+const { PATH_DATA } = require("./constants");
 
-const getFriendsFilePath = () => `${process.cwd()}/friends.json`;
+const getFriendsFilePath = () => `${process.cwd()}/${PATH_DATA}/friends.json`;
 
 const getFriends = () => {
   if (fs.existsSync(getFriendsFilePath())) {

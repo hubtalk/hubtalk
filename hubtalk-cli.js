@@ -1,4 +1,6 @@
 /* eslint-disable no-use-before-define */
+const { execSync } = require("child_process");
+const { PATH_DATA } = require("./src/constants");
 const { sendMessages } = require("./src/messages");
 const { encryptForSelf } = require("./src/crypt");
 const { downloadPublicKey } = require("./src/crypt");
@@ -9,6 +11,7 @@ const { encrypt, generateKeys } = require("./src/crypt");
 const { createMessage } = require("./src/messages");
 const { getFriends } = require("./src/friends");
 const { addFriend } = require("./src/friends");
+
 require("yargs/yargs")(process.argv.slice(2))
   .command({
     command: "af <name>",
@@ -41,9 +44,9 @@ require("yargs/yargs")(process.argv.slice(2))
     handler: () => handleSend(),
   })
   .command({
-    command: "setup",
+    command: "setup <name>",
     desc: "Initial setup",
-    handler: () => handleSetup(),
+    handler: (argv) => handleSetup(argv.name),
   })
   .demandCommand()
   .help();
@@ -110,8 +113,11 @@ function handleSend() {
   console.log("Done!");
 }
 
-function handleSetup() {
+function handleSetup(name) {
   console.log("Setup");
+  console.log("- Cloning data repository...");
+  const cloneCmd = `git clone git@github.com:${name}/hubtalk-box.git ./${PATH_DATA}`;
+  execSync(cloneCmd);
   console.log("- Generating your RSA key pair...");
   generateKeys();
   console.log("Done. You can start sending messages.");

@@ -1,12 +1,14 @@
 const axios = require("axios");
 const { execSync } = require("child_process");
 const { existsSync, readFileSync, writeFileSync } = require("fs");
+const { PATH_DATA } = require("./constants");
 const { getUserName } = require("./user");
 
-const getInboxPath = (name) => `${process.cwd()}/inbox/${name}.json`;
+const getInboxPath = (name) =>
+  `${process.cwd()}/${PATH_DATA}/inbox/${name}.json`;
 
 const getOutboxPath = (recipient) =>
-  `${process.cwd()}/outbox/${recipient}.json`;
+  `${process.cwd()}/box/outbox/${recipient}.json`;
 
 const getMessagesURLForFriend = (name) =>
   `https://raw.githubusercontent.com/${name}/hubtalk/master/outbox/${getUserName()}.json`;

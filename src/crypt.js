@@ -2,11 +2,12 @@ const axios = require("axios");
 const { publicEncrypt, privateDecrypt } = require("crypto");
 const { readFileSync, existsSync } = require("fs");
 const { execSync } = require("child_process");
+const { PATH_DATA } = require("./constants");
 
 const { getFriends } = require("./friends");
 
 const RSA_KEY_NAME = `hubtalk_rsa`;
-const RSA_PUBLIC_KEY_PATH = `${RSA_KEY_NAME}.pub`;
+const RSA_PUBLIC_KEY_PATH = `${PATH_DATA}/${RSA_KEY_NAME}.pub`;
 const RSA_PRIVATE_KEY_PATH = `secret/${RSA_KEY_NAME}`;
 
 const getPrivateKeyPath = () => `${process.cwd()}/secret/hubtalk_rsa`;
