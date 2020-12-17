@@ -17,12 +17,12 @@ const { addFriend } = require("./src/friends");
 // eslint-disable-next-line no-unused-expressions
 yargs(process.argv.slice(2))
   .command({
-    command: "af <name>",
+    command: "add <name>",
     desc: "Add a friend. (Github username)",
     handler: (argv) => handleAddFriend(argv.name),
   })
   .command({
-    command: "lf",
+    command: "friends",
     desc: "List friends.",
     handler: () => handleListFriends(),
   })
