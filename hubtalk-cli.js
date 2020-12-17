@@ -47,7 +47,7 @@ yargs(process.argv.slice(2))
     handler: () => handleSend(),
   })
   .command({
-    command: "setup <github-username>",
+    command: "setup <name>",
     desc: "Initial setup",
     handler: (argv) => handleSetup(argv.name),
   })
